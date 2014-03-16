@@ -1,6 +1,7 @@
 #macro(head)
 <head>
     <title>Laser Tag</title>
-    <meta charset="utf-8"/>
+    <script src="resources/js/angular.js"></script>
+    <script src="resources/js/main.js"></script>
 </head>
 #end

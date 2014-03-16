@@ -1,1 +1,6 @@
-hello
+<div ng-app="app">
+    <div ng-controller="HomeController">
+        {{message}}
+
+    </div>
+</div>
