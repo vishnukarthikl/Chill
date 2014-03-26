@@ -4,10 +4,7 @@ import com.github.vishnukarthik.domain.Customer;
 import com.github.vishnukarthik.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -29,8 +26,18 @@ public class HomeController {
 
     @RequestMapping(value = "customerDetail", method = RequestMethod.GET)
     @ResponseBody
-    public Customer getCustomerDetail(@RequestParam String phone) {
+    public Customer getCustomerDetail(@RequestParam String phone, HttpServletResponse response) {
         Customer customer = customerService.getCustomer(Long.parseLong(phone));
+        if (customer == null) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+        }
         return customer;
+    }
+
+    @RequestMapping(value = "registerCustomer", method = RequestMethod.POST)
+    @ResponseBody
+    public void registerCustomer(@ModelAttribute("customer") Customer customer, HttpServletResponse response) {
+        customerService.saveCustomer(customer);
+        response.setStatus(200);
     }
 }

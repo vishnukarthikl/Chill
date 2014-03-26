@@ -30,4 +30,9 @@ public class AllCustomers {
     private Session getSession() {
         return sessionFactory.getCurrentSession();
     }
+
+    public void save(Customer customer) {
+        CustomerDto customerDto = new CustomerDto(customer);
+        sessionFactory.getCurrentSession().save(customerDto);
+    }
 }

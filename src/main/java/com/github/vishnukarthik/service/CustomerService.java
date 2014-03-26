@@ -22,4 +22,8 @@ public class CustomerService {
     public Customer getCustomer(long phoneNo) {
         return allCustomers.findByPhoneNo(phoneNo);
     }
+
+    public void saveCustomer(Customer customer) {
+        allCustomers.save(customer);
+    }
 }
